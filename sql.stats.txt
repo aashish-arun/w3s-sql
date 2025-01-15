@@ -1,0 +1,9 @@
+Tracker
+
+w3s-sql {
+    [Start Date: 14|01|2025] [Total Time (hr): xx] [Finish Date: DD|MM|2025]
+}
+
+Day-1 {
+    Will be updated in the 2nd Day
+}

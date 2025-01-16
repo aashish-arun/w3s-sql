@@ -133,3 +133,244 @@ Tutorial
                     The COUNT(DISTINCT column_name) is not supported in Microsoft Access databases.There is a workaround for MS Access using:
                         SELECT Count(*) AS DistinctCountries
                         FROM (SELECT DISTINCT Country FROM Customers);
+    
+    WHERE
+
+        WHERE Clause
+            The WHERE clause is used to filter records.
+                e.g. SELECT * FROM Customers
+                     WHERE Country='Mexico';
+        
+        Syntax
+            SELECT column1, column2, ...
+            FROM table_name
+            WHERE condition;
+
+            Note: 
+                The WHERE clause is not only used in SELECT statements, it is also used in UPDATE, DELETE, etc.!
+            
+        Text Fields vs. Numeric Fields
+            SQL requires single quotes around text values (most database systems will also allow double quotes).
+            However, numeric fields should not be enclosed in quotes:
+            e.g. SELECT * FROM Customers
+                 WHERE CustomerID=1;
+
+        Operators in The WHERE Clause
+            You can use other operators than the = operator to filter the search.
+                e.g. SELECT * FROM Customers
+                     WHERE CustomerID > 80;
+                    
+                Note:
+                    This will select all customers with a CustomerID greater than 80.
+        
+        Operators that can be used in the WHERE clause:
+            =	        Equal	
+            >	        Greater than	
+            <	        Less than	
+            >=	        Greater than or equal	
+            <=	        Less than or equal	
+            <>	        Not equal. 
+                        Note: 
+                            In some versions of SQL this operator may be written as !=	
+            BETWEEN	    Between a certain range	
+            LIKE	    Search for a pattern	
+            IN	        To specify multiple possible values for a column
+    
+    Order By
+
+        ORDER BY
+            The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+                e.g. SELECT * FROM Products
+                     ORDER BY Price;
+                 
+        Syntax
+            SELECT column1, column2, ...
+            FROM table_name
+            ORDER BY column1, column2, ... ASC|DESC;
+        
+        DESC
+            The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
+                e.g. SELECT * FROM Products
+                     ORDER BY Price DESC;
+        
+        Order Alphabetically
+            For string values the ORDER BY keyword will order alphabetically:
+                e.g. SELECT * FROM Products
+                     ORDER BY ProductName;
+        
+        Alphabetically DESC
+            To sort the table reverse alphabetically, use the DESC keyword:
+                e.g. SELECT * FROM Products
+                     ORDER BY ProductName DESC;
+
+        ORDER BY Several Columns
+            To sort the table using several columns
+                e.g. SELECT * FROM Customers
+                     ORDER BY Country, CustomerName;
+
+                Note:
+                    This will select all customers from the "Customers" table, sorted by the "Country" and the "CustomerName" column. This means that it orders by Country, but if some rows have the same Country, it orders them by CustomerName.
+        
+        Using Both ASC and DESC
+            To sort the table using both ASC and DESC:
+                e.g. SELECT * FROM Customers
+                     ORDER BY Country ASC, CustomerName DESC;
+
+                Note: 
+                    This will select all customer from the "Customers" table, sorted ascending by the "Country" and descending by the "CustomerName" column.
+
+    And
+
+        AND Operator
+            The WHERE clause can contain one or many AND operators.
+            In which the AND operator is used to filter records based on more than one condition and all conditions need to be true:
+                e.g. SELECT *
+                     FROM Customers
+                     WHERE Country = 'Spain' AND CustomerName LIKE 'G%';
+
+                Note:
+                    This will select all customers from Spain that starts with the letter 'G'.
+                
+        Syntax
+            SELECT column1, column2, ...
+            FROM table_name
+            WHERE condition1 AND condition2 AND condition3 ...;
+        
+        AND vs OR
+            The AND operator displays a record if all the conditions are TRUE.
+            The OR operator displays a record if any of the conditions are TRUE.
+        
+        All Conditions Must Be True
+            To select only the records that will evalute to true for all the mentioned conditions:
+                e.g. SELECT * FROM Customers
+                     WHERE Cunotry = 'Germany'
+                     AND City = 'Berlin'
+                     AND PostalCode > 12000;
+
+                Note:
+                    This will select all fields from Customers where Country is "Germany" AND City is "Berlin" AND PostalCode is higher than 12000.
+                    
+        Combining AND and OR
+            You can combine the AND and OR operators.
+
+            With Parenthesis
+                Use parenthesis to get the correct result (i.e. make logical sense).
+                    e.g. SELECT * FROM Customers
+                         WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');
+
+                    Note: 
+                        This will select all Spanish customers that starts with either "G" or "R".
+
+            Without Parenthesis
+                Without using parenthesis you will get the incorrect result (i.e. make logical error).
+                    e.g. SELECT * FROM Customers
+                         WHERE Country = 'Spain' AND CustomerName LIKE 'G%' OR CustomerName LIKE 'R%';
+
+                    Note:
+                        This will select all customers that either are from Spain and starts with either "G", or starts with the letter "R".
+    
+    Or
+
+        OR Operator
+            The WHERE clause can contain one or more OR operators.
+            Similar to the AND operator the OR operator is also used to filter records based on more than one condition, but only one condition need to be true:
+                e.g. SELECT *
+                     FROM Customers
+                     WHERE Country = 'Germany' OR Country = 'Spain';
+
+                Note:
+                    This will select all customers from Germany or Spain.
+        
+        Syntax
+            SELECT column1, column2, ...
+            FROM table_name
+            WHERE condition1 OR condition2 OR condition3 ...;
+        
+        OR vs AND
+            The OR operator displays a record if any of the conditions are TRUE.
+            The AND operator displays a record if all the conditions are TRUE.
+        
+        At Least One Condition Must Be True
+            To select only the records that will evalute to true for any of the mentioned conditions:
+                e.g. SELECT * FROM Customers
+                     WHERE City = 'Berlin' OR CustomerName LIKE 'G%' OR Country = 'Norway';
+                
+                Note:
+                    This will selects all fields from Customers where either City is "Berlin", CustomerName starts with the letter "G" or Country is "Norway".
+        
+        Combining AND and OR
+            You can combine the AND and OR operators.
+
+            With Parenthesis
+                Use parenthesis to get the correct result (i.e. make logical sense).
+                    e.g. SELECT * FROM Customers
+                         WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');
+
+                    Note: 
+                        This will select all Spanish customers that starts with either "G" or "R".
+
+            Without Parenthesis
+                Without using parenthesis you will get the incorrect result (i.e. make logical error).
+                    e.g. SELECT * FROM Customers
+                         WHERE Country = 'Spain' AND CustomerName LIKE 'G%' OR CustomerName LIKE 'R%';
+
+                    Note:
+                        This will select all customers that either are from Spain and starts with either "G", or starts with the letter "R".
+    
+    Not
+
+        NOT Operator
+            The NOT operator is used in combination with other operators to give the opposite result, also called the negative result.
+                e.g. SELECT * FROM Customers
+                     WHERE NOT Country = 'Spain';
+
+                Note:
+                    This will select all the customers that are NOT from Spain. Also the NOT operator can used in combination with the = operator, but it can be also be used in combination with other comparison and/or logical operators.
+        
+        Syntax
+            SELECT column1, column2, ...
+            FROM table_name
+            WHERE NOT condition;
+
+        NOT operators with other comparison operator.
+            We can use NOT operators with other logical and/or comparison operators
+
+            NOT LIKE
+                To get the records that evalute to true for the inverse of the LIKE condition.
+                    e.g. SELECT * FROM Customers
+                         WHERE CustomerName NOT LIKE 'A%';
+
+                    Note:
+                        This will select customers that does not start with the letter 'A'.
+
+            NOT BETWEEN
+                To get the records that evalute to true for the inverse of the BETWEEN condition.
+                    e.g. SELECT * FROM Customers
+                         WHERE CustomerID NOT BETWEEN 10 AND 60;
+
+                    Note:
+                        This will select customers that does not start with the letter 'A'.
+
+            NOT IN
+                To get the records that evalute to true for the inverse of the IN condition.
+                    e.g. SELECT * FROM Customers
+                         WHERE City NOT IN ('Paris', 'London');
+
+                    Note:
+                        This will select customers that are not from Paris or London.
+        
+            NOT Greater Than
+                To get the records that evalute to true for the inverse of the greater than (>) condition.
+                    e.g. SELECT * FROM Customers
+                         WHERE NOT CustomerID > 50;
+
+                    Note:
+                        This will select customers with a CustomerId not greater than 50. Also there is a not-greater-than operator: !> that would give you the same result.
+
+            NOT Less Than
+                To get the records that evalute to true for the inverse of the less than (<) condition.
+                    e.g. SELECT * FROM Customers
+                         WHERE NOT CustomerID > 50;
+
+                    Note:
+                        This will select customers with a CustomerID not less than 50. Also there is a not-less-than operator: !< that would give you the same result.
